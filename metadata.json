@@ -1,0 +1,8 @@
+{
+    "uuid": "showram@example.com",
+    "name": "Show RAM",
+    "description": "Displays a icon in panel showing ram usage",
+    "version": 1,
+    "shell-version": [ "3.36", "3.38" ],
+    "url": ""
+}
