@@ -24,10 +24,11 @@ function setButtonText () {
 
   // MEMORY
   var [ok, out, err, exit] = GLib.spawn_command_line_sync(
-    "/bin/bash -c \"cat /proc/meminfo | awk '/MemFree/ {print $2/(1024*1024)}'\""
+    "/bin/bash -c \"cat /proc/meminfo | awk '/MemAvailable/ {print $2/(1024*1024)}'\""
   );
   if (out.length > 0) {
       let mem = parseFloat(out.toString().replace('\n', ''));
+      mem = parseFloat(7972508)/(1024*1024) - mem;
       
     arr.push("Mem: "+mem.toFixed(2)+" GB");
   }
