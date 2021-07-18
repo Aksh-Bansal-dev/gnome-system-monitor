@@ -26,9 +26,14 @@ function setButtonText () {
   var [ok, out, err, exit] = GLib.spawn_command_line_sync(
     "/bin/bash -c \"cat /proc/meminfo | awk '/MemAvailable/ {print $2/(1024*1024)}'\""
   );
-  if (out.length > 0) {
+  var [ok2, out2, err2, exit2] = GLib.spawn_command_line_sync(
+    "/bin/bash -c \"cat /proc/meminfo | awk '/MemTotal/ {print $2/(1024*1024)}'\""
+  );
+  if (out.length > 0 && out2.length > 0) {
       let mem = parseFloat(out.toString().replace('\n', ''));
-      mem = parseFloat(7972508)/(1024*1024) - mem;
+      let totMem = parseFloat(out2.toString().replace('\n', ''));
+      
+      mem = totMem - mem;
       
     arr.push("Mem: "+mem.toFixed(2)+" GB");
   }
